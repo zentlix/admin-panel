@@ -1,0 +1,46 @@
+{
+    "name": "zentlix/admin-panel",
+    "description": "Admin Panel for Spiral Framework",
+    "homepage": "https://github.com/zentlix/admin-panel",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.1",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "spiral/testing": "^2.3",
+        "vimeo/psalm": "^5.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spiral\\AdminPanel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spiral\\AdminPanel\\Tests\\App\\": "tests/app",
+            "Spiral\\AdminPanel\\Tests\\": "tests/src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "psalm": "vendor/bin/psalm --config=psalm.xml ./src",
+        "cs": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -vvv --dry-run --using-cache=no"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "spiral/composer-publish-plugin": true
+        }
+    },
+    "extra": {
+        "spiral": {
+            "bootloaders": [
+                "Spiral\\AdminPanel\\Bootloader\\AdminPanelBootloader"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
