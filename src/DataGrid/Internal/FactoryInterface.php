@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Spiral\AdminPanel\DataGrid;
+namespace Spiral\AdminPanel\DataGrid\Internal;
 
-interface ColumnFactoryInterface
+use Spiral\AdminPanel\DataGrid\GridSchemaInterface;
+
+interface FactoryInterface
 {
     /**
      * @param non-empty-string $name

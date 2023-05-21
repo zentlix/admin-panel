@@ -36,6 +36,10 @@ final class AdminPanelConfig extends InjectableConfig
                 'template' => 'admin:layout/sidebar.twig'
             ]
         ],
+        'datagrid' => [
+            'search' => 'Search',
+            'search_placeholder' => 'Search...'
+        ],
         'styles' => [
             'admin/keeper/keeper.css',
             'admin/app.css'

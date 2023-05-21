@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spiral\AdminPanel\Bootloader;
 
 use Spiral\AdminPanel\Twig\Extension\AssetExtension;
+use Spiral\AdminPanel\Twig\Extension\BreadcrumbsExtension;
 use Spiral\AdminPanel\Twig\Extension\ConfigExtension;
 use Spiral\AdminPanel\Twig\Extension\DataGridExtension;
 use Spiral\AdminPanel\Twig\Extension\IconExtension;
@@ -31,5 +32,6 @@ final class TwigBootloader extends Bootloader
         $twig->addExtension(TitleExtension::class);
         $twig->addExtension(IconExtension::class);
         $twig->addExtension(DataGridExtension::class);
+        $twig->addExtension(BreadcrumbsExtension::class);
     }
 }

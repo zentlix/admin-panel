@@ -1,0 +1,57 @@
+<div class="sf-table">
+    <div class="js-sf-datagrid" id="{{ grid.name }}" data-url="{{ url }}">
+        {% block grid_filter %}
+            <div class="border-bottom px-3 pt-3 pb-1">
+                <div class="row">
+                    <div class="col col-12 col-lg-7 col-md-6 col-sm-12 mb-2"></div>
+                    <div class="col col-12 col-lg-5 col-md-6 col-sm-12">
+                        <form
+                            action="#{{ grid.name }}-search"
+                            id="{{ grid.name }}-search"
+                            method="post"
+                            enctype="multipart/form-data"
+                            accept-charset="UTF-8"
+                            class="js-sf-form"
+                            data-lock-type="none"
+                            data-immediate="300"
+                        >
+                            <div class="form-content form-row">
+                                <div data-field="true" class="form-group col-sm-12 col-md-12 ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend" title="{{ admin_panel_config('datagrid.search') | trans }}">
+                                    <span class="form-control text-muted bg-white border-right-0">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                        </div>
+                                        <input
+                                            id="{{ grid.name }}-search-input"
+                                            data-input="true"
+                                            class="form-control"
+                                            type="search"
+                                            name="search"
+                                            placeholder="{{ admin_panel_config('datagrid.search_placeholder') | trans }}"
+                                            value=""
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        <script type="text/javascript" role="sf-options">
+            (function () {
+                return {{ gridOptions | raw }};
+            });
+        </script>
+        <script type="text/javascript" role="sf-datagrid-renderer">
+            console.log( window.SFToolkit_tools_datagrid)
+            window.SFToolkit_tools_datagrid = window.SFToolkit_tools_datagrid || {}; window.SFToolkit_tools_datagrid['html'] = function () {
+                return function (html) {
+                    return html;
+                }
+            };
+        </script>
+    </div>
+</div>

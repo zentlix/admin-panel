@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Spiral\AdminPanel\DataGrid;
+namespace Spiral\AdminPanel\DataGrid\Internal;
 
 use Spiral\AdminPanel\DataGrid\Configurator\ColumnsConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\DefaultsConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\FiltersConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\PaginatorConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\SortersConfigurator;
-use Spiral\Core\FactoryInterface;
+use Spiral\AdminPanel\DataGrid\GridSchemaInterface;
+use Spiral\Core\FactoryInterface as Container;
 
-final class Factory implements ColumnFactoryInterface
+final class Factory implements FactoryInterface
 {
     public function __construct(
-        private readonly FactoryInterface $factory
+        private readonly Container $factory
     ) {
     }
 

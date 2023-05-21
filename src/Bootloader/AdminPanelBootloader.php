@@ -22,6 +22,8 @@ use Spiral\Symfony\Form\Bootloader\TwigBootloader as FormTwigBootloader;
 final class AdminPanelBootloader extends Bootloader
 {
     protected const DEPENDENCIES = [
+        DataGridBootloader::class,
+        ResourceBootloader::class,
         TokenizerBootloader::class,
         TwigBootloader::class,
         LivewireBootloader::class,
@@ -74,7 +76,11 @@ final class AdminPanelBootloader extends Bootloader
                 'layout' => [
                     'sidebar' => [
                         'template' => 'admin:layout/sidebar.twig'
-                    ]
+                    ],
+                ],
+                'datagrid' => [
+                    'search' => 'Search',
+                    'search_placeholder' => 'Search...'
                 ],
                 'styles' => [
                     'admin/keeper/keeper.css',

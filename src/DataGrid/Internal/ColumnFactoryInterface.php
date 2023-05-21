@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Spiral\AdminPanel\DataGrid\Column;
+namespace Spiral\AdminPanel\DataGrid\Internal;
+
+use Spiral\AdminPanel\DataGrid\Column\ColumnInterface;
 
 interface ColumnFactoryInterface
 {

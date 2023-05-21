@@ -1,0 +1,34 @@
+{% extends 'admin:layout/base.twig' %}
+
+{% block content %}
+    <aside class="sf-sidebar active" data-sf="sidebar" id="sidebar">
+        <div class="sf-sidebar__container">
+            <div class="sf-sidebar__logo">
+                <div class="sidebar__img">{{ admin_panel_config('brand_logo') | raw }}</div>
+                <span>{{ admin_panel_config('brand') | raw }}</span>
+            </div>
+            {{ knp_menu_render('admin_panel.sidebar', {'template': admin_panel_config('layout.sidebar.template')}) }}
+        </div>
+    </aside>
+    <main class="sf-main">
+        <header class="sf-header">
+            <button class="sf-sidebar__toggle" data-sf="sidebar-toggle" aria-expanded="true" aria-controls="sidebar">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="sf-header-user" data-sf="dropdown">
+                <button class="sf-header-user__info" data-sf="dropdown-toggle" id="sf-header-user-menu" aria-haspopup="true"
+                        aria-expanded="false">
+                    <div class="sf-user-short-info">
+                        <span class="sf-user-short-info__avatar">KU</span>
+                        <span class="sf-user-short-info__name">Keeper User</span>
+                    </div>
+                </button>
+                <div class="sf-header-user__menu dropdown-menu" data-sf="dropdown-menu" aria-labelledby="sf-header-user-menu">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Log Out</a>
+                </div>
+            </div>
+        </header>
+        {% block body %}{% endblock %}
+    </main>
+{% endblock %}

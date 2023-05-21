@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Spiral\AdminPanel\DataGrid\Configurator;
 
 use Spiral\AdminPanel\DataGrid\ColumnsConfigurator as ColumnsConfiguratorInterface;
-use Spiral\AdminPanel\DataGrid\Column\ColumnFactoryInterface;
 use Spiral\AdminPanel\DataGrid\Column\ColumnInterface;
 use Spiral\AdminPanel\DataGrid\Exception\InvalidArgumentException;
+use Spiral\AdminPanel\DataGrid\Internal\ColumnFactoryInterface;
 
 final class ColumnsConfigurator implements ColumnsConfiguratorInterface
 {

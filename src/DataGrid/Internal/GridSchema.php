@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spiral\AdminPanel\DataGrid;
+namespace Spiral\AdminPanel\DataGrid\Internal;
 
 use Spiral\AdminPanel\DataGrid\Column\AbstractColumn;
 use Spiral\AdminPanel\DataGrid\Column\ColumnInterface;
@@ -11,6 +11,7 @@ use Spiral\AdminPanel\DataGrid\Configurator\DefaultsConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\FiltersConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\PaginatorConfigurator;
 use Spiral\AdminPanel\DataGrid\Configurator\SortersConfigurator;
+use Spiral\AdminPanel\DataGrid\GridSchemaInterface;
 use Spiral\DataGrid\GridSchema as DataGridGridSchema;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;

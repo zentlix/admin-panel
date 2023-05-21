@@ -1,0 +1,17 @@
+<nav class="sf-breadcrumb" aria-label="breadcrumb">
+    <ul class="sf-breadcrumb__list">
+        {% for item in breadcrumbs %}
+            {% if not loop.last %}
+                <li class="sf-breadcrumb__item">
+                    {% if item.uri is not empty %}
+                        <a href="{{ item.uri }}">{{ item.label | trans }}</a>
+                    {% else %}
+                        {{ item.label | trans }}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li class="sf-breadcrumb__item active" aria-current="page">{{ item.label | trans }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

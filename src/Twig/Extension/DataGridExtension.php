@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spiral\AdminPanel\Twig\Extension;
 
 use Spiral\AdminPanel\DataGrid\Column\ColumnInterface;
-use Spiral\AdminPanel\DataGrid\GridSchema;
+use Spiral\AdminPanel\DataGrid\Internal\GridSchema;
 use Spiral\AdminPanel\DataGrid\Registry\GridSchemaRegistryInterface;
 use Spiral\Core\FactoryInterface;
 use Spiral\Translator\TranslatorInterface;
@@ -27,6 +27,10 @@ final class DataGridExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param non-empty-string $name
+     * @param non-empty-string $url
+     */
     public function getDataGrid(string $name, string $url, array $gridOptions = []): string
     {
         $grid = $this->factory->make(GridSchemaRegistryInterface::class)->get($name);
