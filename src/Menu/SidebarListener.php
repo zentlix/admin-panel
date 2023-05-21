@@ -24,12 +24,12 @@ final class SidebarListener implements TokenizationListenerInterface
     {
         $attr = $this->reader->firstClassMetadata($class, AsSidebar::class);
 
-        if ($attr !== null && !$this->registry->has('zentlix.admin.sidebar')) {
+        if ($attr !== null && !$this->registry->has('admin_panel.sidebar')) {
             $menu = $this->container->get($class->getName());
 
             \assert($menu instanceof MenuInterface);
 
-            $this->registry->add('zentlix.admin.sidebar', $menu);
+            $this->registry->add('admin_panel.sidebar', $menu);
         }
     }
 

@@ -1,0 +1,33 @@
+{% set fontsUrl = admin_panel_config('google_fonts') %}
+{% set favicon = admin_panel_config('favicon') %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ admin_panel_title(title | default('Admin Panel')) }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    {% if favicon is not empty %}
+        <link rel="icon" type="image/x-icon" href="{{ favicon }}">
+    {% endif %}
+    {{ livewire_styles() }}
+    {% if fontsUrl is not empty %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="{{ fontsUrl }}" rel="stylesheet" />
+    {% endif %}
+    {% for path in admin_panel_config('styles') %}
+        <link rel="stylesheet" href="{{ admin_panel_asset(path) }}" />
+    {% endfor %}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    {{ livewire_scripts() }}
+    <script>
+        window.AdminPanelData = {{ admin_panel_config('script_data') | json_encode() }}
+    </script>
+    {% for path in admin_panel_config('scripts') %}
+        <script type="text/javascript" src="{{ admin_panel_asset(path) }}"></script>
+    {% endfor %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

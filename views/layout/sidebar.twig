@@ -1,0 +1,81 @@
+{% extends 'knpMenu:knp_menu.twig' %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% import _self as knp_menu %}
+            <nav class="sf-nav" data-sf="nav">
+                {{ block('children') }}
+            </nav>
+    {% endif %}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {# displaying the item #}
+        {% import _self as knp_menu %}
+        <div class="sf-navgroup">
+            {%- if item.extra('segment') is empty %}
+                {% set uid = "now" | date('Uv') %}
+                <ul class="sf-nav__list">
+                    <li class="sf-nav__item">
+                        {%- if item.hasChildren and options.depth is not same as(0) %}
+                            <div
+                                class="sf-nav__item-heading"
+                                data-sf="nav-item-toggle"
+                                aria-expanded="{% if matcher.isCurrent(item) %}true{% else %}false{% endif %}"
+                                aria-controls="{{ uid }}"
+                            >
+                                {{ block('icon') }}
+                                <span>{{ block('label') | trans }}</span>
+                            </div>
+                            <div class="sf-nav__item-content" data-sf-nav="item-content" id="{{ uid }}">
+                                <div class="sf-subnav">
+                                    {{ block('subnav') }}
+                                </div>
+                            </div>
+                        {%- else %}
+                            {{ block('linkElement') }}
+                        {%- endif %}
+                    </li>
+                </ul>
+            {%- else %}
+                {{ block('spanElement') }}
+            {%- endif %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block subnav %}
+    {# save current variables #}
+    {% set currentItem = item %}
+
+    {% for item in currentItem.children %}
+        <a class="sf-subnav__item" href="{{ item.uri }}">
+            {{ block('icon') }}
+            <span>{{ block('label') | trans }}</span>
+        </a>
+    {% endfor %}
+
+    {# restore current variables #}
+    {% set item = currentItem %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import _self as knp_menu %}
+    <a href="{{ item.uri }}" class="sf-nav__item-heading">
+        {{ block('icon') }}
+        <span>{{ block('label') | trans }}</span>
+    </a>
+{% endblock %}
+
+{% block spanElement %}
+    {% import _self as knp_menu %}
+    <div class="sf-navgroup__title">{{ block('label') | trans }}</div>
+{% endblock %}
+
+{% block icon %}
+    {% import _self as knp_menu %}
+    {%- if item.getExtra('icon') is not empty -%}
+        {{ admin_panel_icon(item.getExtra('icon') is of_type('string') ? item.getExtra('icon') : item.getExtra('icon').value, 'sidebar-icon') }}
+    {%- endif -%}
+{% endblock %}

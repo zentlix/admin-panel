@@ -5,13 +5,26 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "spiral/auth": "^3.7",
         "spiral/attributes": "^3.0",
+        "spiral/boot": "^3.7",
+        "spiral/config": "^3.7",
+        "spiral/core": "3.7",
+        "spiral/security": "^3.7",
         "spiral/tokenizer": "^3.7",
-        "zentlix/knp-menu": "^1.1"
+        "spiral/translator": "^3.7",
+        "spiral/views": "^3.7",
+        "spiral/twig-bridge": "^2.0.1",
+        "spiral/data-grid": "^3.0",
+        "spiral-packages/livewire": "^1.0",
+        "spiral-packages/symfony-form": "^1.0",
+        "symfony/property-access": "^5.4 || ^6.0",
+        "zentlix/knp-menu": "^1.1",
+        "zentlix/twig-extensions": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.1",
-        "friendsofphp/php-cs-fixer": "^3.8",
+        "friendsofphp/php-cs-fixer": "^3.15",
         "spiral/testing": "^2.3",
         "vimeo/psalm": "^5.11"
     },
