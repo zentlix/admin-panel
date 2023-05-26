@@ -22,7 +22,9 @@ class LinkColumn extends ViewColumn
     ) {
         parent::__construct($views);
 
-        $this->accessor = $accessor ?? PropertyAccess::createPropertyAccessor();
+        $this->accessor = $accessor ?? PropertyAccess::createPropertyAccessorBuilder()
+            ->enableMagicMethods()
+            ->getPropertyAccessor();
     }
 
     /**

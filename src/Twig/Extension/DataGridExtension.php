@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Spiral\AdminPanel\Twig\Extension;
 
 use Spiral\AdminPanel\DataGrid\Column\ColumnInterface;
+use Spiral\AdminPanel\DataGrid\GridSchemaInterface;
+use Spiral\AdminPanel\DataGrid\Internal\FactoryInterface;
 use Spiral\AdminPanel\DataGrid\Internal\GridSchema;
 use Spiral\AdminPanel\DataGrid\Registry\GridSchemaRegistryInterface;
-use Spiral\Core\FactoryInterface;
+use Spiral\Core\FactoryInterface as Container;
 use Spiral\Translator\TranslatorInterface;
 use Spiral\Views\ViewsInterface;
 use Twig\Extension\AbstractExtension;
@@ -16,7 +18,7 @@ use Twig\TwigFunction;
 final class DataGridExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly FactoryInterface $factory
+        private readonly Container $factory
     ) {
     }
 
@@ -33,7 +35,13 @@ final class DataGridExtension extends AbstractExtension
      */
     public function getDataGrid(string $name, string $url, array $gridOptions = []): string
     {
-        $grid = $this->factory->make(GridSchemaRegistryInterface::class)->get($name);
+        $gridClass = $this->factory->make(GridSchemaRegistryInterface::class)->get($name);
+
+        /** @var GridSchemaInterface $gridSchema */
+        $gridSchema = $this->factory->make($gridClass);
+
+        $grid = $this->factory->make(FactoryInterface::class)->create($name, $gridSchema);
+
         $gridOptions += $this->getGridOptions($grid);
 
         return $this->factory

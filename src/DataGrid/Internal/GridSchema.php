@@ -14,11 +14,11 @@ use Spiral\AdminPanel\DataGrid\Configurator\SortersConfigurator;
 use Spiral\AdminPanel\DataGrid\GridSchemaInterface;
 use Spiral\DataGrid\GridSchema as DataGridGridSchema;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 class GridSchema extends DataGridGridSchema
 {
-    protected PropertyAccessor $accessor;
+    protected PropertyAccessorInterface $accessor;
 
     /**
      * @param non-empty-string $name
@@ -31,7 +31,9 @@ class GridSchema extends DataGridGridSchema
         protected readonly PaginatorConfigurator $paginatorConfigurator,
         protected readonly DefaultsConfigurator $defaultsConfigurator
     ) {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->disableMagicMethods()
+            ->getPropertyAccessor();
     }
 
     public function configure(GridSchemaInterface $grid): void

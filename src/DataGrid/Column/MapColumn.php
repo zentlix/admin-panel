@@ -20,8 +20,13 @@ class MapColumn extends TextColumn
         'map' => []
     ];
 
-    public function normalize($value): string
+    public function normalize(mixed $value): string
     {
+        $value = match (true) {
+            $value instanceof \BackedEnum => $value->value,
+            default => (string) $value
+        };
+
         return parent::normalize($this->options['map'][$value] ?? $this->options['default'] ?? $value);
     }
 }
