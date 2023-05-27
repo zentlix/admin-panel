@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Spiral\AdminPanel\DataGrid\Column;
 
+use Spiral\Translator\TranslatorInterface;
+
 class MapColumn extends TextColumn
 {
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
+    }
+
     /**
      * @var array<non-empty-string, mixed>
      */
@@ -27,6 +34,8 @@ class MapColumn extends TextColumn
             default => (string) $value
         };
 
-        return parent::normalize($this->options['map'][$value] ?? $this->options['default'] ?? $value);
+        return $this->translator->trans(
+            parent::normalize($this->options['map'][$value] ?? $this->options['default'] ?? $value)
+        );
     }
 }

@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace Spiral\AdminPanel\DataGrid\Configurator;
 
-use Spiral\AdminPanel\DataGrid\Exception\InvalidArgumentException;
 use Spiral\DataGrid\Specification\FilterInterface;
 use Spiral\AdminPanel\DataGrid\FiltersConfigurator as FiltersConfiguratorInterface;
 
 final class FiltersConfigurator implements FiltersConfiguratorInterface
 {
     /**
-     * @var array<non-empty-string, FilterInterface>
+     * @var array<non-empty-string, array{filter: FilterInterface, label?: non-empty-string, choices?: array}>
      */
     private array $filters = [];
 
+    public function search(FilterInterface $filter): self
+    {
+        $this->filters['search']['filter'] = $filter;
+
+        return $this;
+    }
+
     /**
      * @param non-empty-string $name
+     * @param non-empty-string $label
      */
-    public function add(string $name, FilterInterface $filter): self
+    public function filter(string $name, FilterInterface $filter, string $label, array $choices): self
     {
-        if ($this->hasFilter($name)) {
-            throw new InvalidArgumentException(\sprintf('Filter with name `%s` already exists.', $name));
-        }
-
-        $this->filters[$name] = $filter;
+        $this->filters[$name]['filter'] = $filter;
+        $this->filters[$name]['label'] = $label;
+        $this->filters[$name]['choices'] = $choices;
 
         return $this;
     }
@@ -38,7 +43,7 @@ final class FiltersConfigurator implements FiltersConfiguratorInterface
     }
 
     /**
-     * @return array<non-empty-string, FilterInterface>
+     * @return array<non-empty-string, array{filter: FilterInterface, label?: non-empty-string, choices?: array}>
      */
     public function getFilters(): array
     {

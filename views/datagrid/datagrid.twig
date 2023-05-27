@@ -1,41 +1,107 @@
+{% set filters = grid.filters | filter((v, k) => k != 'search') %}
+
 <div class="sf-table">
     <div class="js-sf-datagrid" id="{{ grid.name }}" data-url="{{ url }}">
         {% block grid_filter %}
             <div class="border-bottom px-3 pt-3 pb-1">
                 <div class="row">
-                    <div class="col col-12 col-lg-7 col-md-6 col-sm-12 mb-2"></div>
+                    <div class="col col-12 col-lg-7 col-md-6 col-sm-12 mb-2">
+                        {% if filters | length > 0 %}
+                            <div class="sf-filter-toggle js-sf-filter-toggle" data-id="{{ grid.name }}">
+                                <div class="">
+                                    <button
+                                        class="btn btn-light sf-filter-toggle-button"
+                                        data-class-emptyfilter="btn-light"
+                                        data-class-hasfilter="btn-primary"
+                                        data-template="<i class='fas fa-filter'></i> [[Filter]]"
+                                    ><i class="fas fa-filter"></i> [[Filter]]
+                                    </button>
+                                </div>
+                                <div class="sf-filter-toggle-panel" data-class-open="" data-class-closed="d-none">
+                                    <div class="position-relative">
+                                        <div class="border position-absolute shadow-sm p-3 bg-white w-100 mt-2" style="z-index: 1">
+                                            <form
+                                                action="#{{ grid.name }}-filter"
+                                                id="#{{ grid.name }}-filter"
+                                                data-submit-on-reset="true"
+                                                method="post"
+                                                enctype="multipart/form-data"
+                                                accept-charset="UTF-8"
+                                                class="js-sf-form"
+                                                data-lock-type="none"
+                                            >
+                                                {% for name, filter in filters %}
+                                                    <div data-field="true" class="form-group col-sm-12 col-md-12 ">
+                                                        <label for="grid-filter-{{ name }}">{{ grid.filterLabel(name) }}</label>
+                                                        <select
+                                                            id="grid-filter-{{ name }}"
+                                                            data-input="true"
+                                                            class="form-control "
+                                                            name="{{ name }}"
+                                                        >
+                                                            {% for choiceName, choiceValue in grid.filterChoices(name) %}
+                                                                <option value="{{ choiceName }}">{{ choiceValue | trans }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                {% endfor %}
+
+                                                {% if buttons %}
+                                                    <div class="col-12 text-right">
+                                                        <div class="btn-group">
+                                                            <button type="reset" class="btn btn-light" data-sf="" data-target="">
+                                                                <span>[[Clear]]</span>
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary" data-sf="" data-target="">
+                                                                <span>Apply</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if refresh %}
+                                    <a class="btn btn-light js-sf-grid-refresh" data-grid-id="{{ grid.name }}"><i class="fas fa-sync"></i> [[Refresh]]</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
                     <div class="col col-12 col-lg-5 col-md-6 col-sm-12">
-                        <form
-                            action="#{{ grid.name }}-search"
-                            id="{{ grid.name }}-search"
-                            method="post"
-                            enctype="multipart/form-data"
-                            accept-charset="UTF-8"
-                            class="js-sf-form"
-                            data-lock-type="none"
-                            data-immediate="300"
-                        >
-                            <div class="form-content form-row">
-                                <div data-field="true" class="form-group col-sm-12 col-md-12 ">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend" title="{{ admin_panel_config('datagrid.search') | trans }}">
+                        {% if grid.hasFilter('search') %}
+                            <form
+                                action="#{{ grid.name }}-search"
+                                id="{{ grid.name }}-search"
+                                method="post"
+                                enctype="multipart/form-data"
+                                accept-charset="UTF-8"
+                                class="js-sf-form"
+                                data-lock-type="none"
+                                data-immediate="300"
+                            >
+                                <div class="form-content form-row">
+                                    <div data-field="true" class="form-group col-sm-12 col-md-12 ">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend" title="{{ admin_panel_config('datagrid.search') | trans }}">
                                     <span class="form-control text-muted bg-white border-right-0">
                                         <i class="fas fa-search"></i>
                                     </span>
+                                            </div>
+                                            <input
+                                                id="{{ grid.name }}-search-input"
+                                                data-input="true"
+                                                class="form-control"
+                                                type="search"
+                                                name="search"
+                                                placeholder="{{ admin_panel_config('datagrid.search_placeholder') | trans }}"
+                                                value=""
+                                            />
                                         </div>
-                                        <input
-                                            id="{{ grid.name }}-search-input"
-                                            data-input="true"
-                                            class="form-control"
-                                            type="search"
-                                            name="search"
-                                            placeholder="{{ admin_panel_config('datagrid.search_placeholder') | trans }}"
-                                            value=""
-                                        />
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
