@@ -110,8 +110,7 @@ final class DataGridExtension extends AbstractExtension
     {
         $translator = $this->factory->make(TranslatorInterface::class);
 
-        $sortDir = static function (string $column, array $sorters, array $defaults): ?string
-        {
+        $sortDir = static function (string $column, array $sorters, array $defaults): ?string {
             if (!isset($sorters[$column])) {
                 return null;
             }
