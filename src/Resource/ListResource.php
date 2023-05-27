@@ -18,7 +18,8 @@ class ListResource implements ResourceResponse
         public readonly array $parameters = [],
         public readonly array $breadcrumbs = [],
         public ?string $grid = null,
-        public ?string $gridRoute = null
+        public ?string $gridRoute = null,
+        public array $gridOptions = []
     ) {
     }
 }

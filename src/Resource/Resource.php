@@ -26,6 +26,7 @@ final class Resource implements ResourceInterface
             'title' => $listResource->title,
             'grid' => $listResource->grid,
             'gridRoute' => $listResource->gridRoute,
+            'gridOptions' => $listResource->gridOptions,
             'breadcrumbs' => $listResource->breadcrumbs
         ];
 

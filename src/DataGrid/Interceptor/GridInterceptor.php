@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spiral\AdminPanel\Interceptor;
+namespace Spiral\AdminPanel\DataGrid\Interceptor;
 
 use Psr\Container\ContainerInterface;
 use Spiral\AdminPanel\Attribute\DataGrid;
