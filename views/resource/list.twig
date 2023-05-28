@@ -1,13 +1,5 @@
-{% extends 'admin:layout/page.twig' %}
+{% extends 'admin:layout/resource.twig' %}
 
-{% block title %}{{ title | trans }}{% endblock %}
-
-{% block body %}
-    <div class="sf-heading">
-        {{ admin_panel_breadcrumbs(breadcrumbs) }}
-        <h1>{{ title | trans }}</h1>
-    </div>
-    <div class="sf-main__wrapper">
-        {{ dataGrid(grid, path(gridRoute), gridOptions) }}
-    </div>
+{% block resource %}
+    {{ dataGrid(grid, path(gridRoute), gridOptions) }}
 {% endblock %}

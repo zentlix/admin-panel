@@ -39,7 +39,7 @@ class ViewColumn extends AbstractColumn
         return $value;
     }
 
-    public function getTemplate(): string
+    protected function getTemplate(): string
     {
         if (!\is_string($this->options['template']) || empty($this->options['template'])) {
             throw new InvalidArgumentException('Option `template` is required and must be a string.');
