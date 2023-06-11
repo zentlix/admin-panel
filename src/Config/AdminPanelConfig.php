@@ -42,12 +42,15 @@ final class AdminPanelConfig extends InjectableConfig
         ],
         'styles' => [
             'admin/keeper/keeper.css',
-            'admin/app.css'
+            'admin/app.css',
+            'admin/toastr/toastr.min.css'
         ],
         'scripts' => [
             'admin/toolkit/ie11.js',
             'admin/keeper/keeper.js',
             'admin/toolkit/toolkit.js',
+            'admin/jquery/jquery.min.js',
+            'admin/toastr/toastr.min.js'
         ],
         'script_data' => []
     ];

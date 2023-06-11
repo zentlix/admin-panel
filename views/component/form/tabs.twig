@@ -1,0 +1,49 @@
+{% set buttons = form | filter((v, k) => k == 'buttons') %}
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" data-sf="tabnav" role="tablist">
+            {% for code, child in form | filter((v, k) => k != 'buttons') %}
+                <li class="nav-item">
+                    <a
+                        id="#{{ code }}"
+                        class="nav-link"
+                        data-sf="tabnav-tab"
+                        data-toggle="tab"
+                        href="#{{ code }}"
+                        role="tab"
+                        aria-controls="{{ code }}"
+                        aria-selected="{% if loop.index == 1 %}true{% else %}false{% endif %}"
+                    >
+                        {{ child.vars.label | trans }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {{ form_start(form) }}
+        <div class="card-body">
+            <div class="nav-tabs border-bottom-0">
+                <div class="tab-content">
+                    {% for code, child in form | filter((v, k) => k != 'buttons') %}
+                        <div class="sf-tabnav__content tab-pane {% if loop.index == 1 %}active{% endif %}" id="{{ code }}" role="tabpanel" aria-labelledby="{{ code }}-tab">
+                            {{ form_row(child, {'label': false}) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            {% if buttons | length > 0 %}
+                {% for child in buttons %}
+                    {{ form_widget(child) }}
+                {% endfor %}
+            {% else %}
+                <button class="btn btn-sm btn-primary" type="submit">
+                    <i class="fas fa-check fa-fw"></i> {{ 'Update' | trans }}
+                </button>
+                <a href="{{ resource.redirectTo }}" class="btn btn-sm btn-secondary" type="button">{{ 'Cancel' | trans }}</a>
+            {% endif %}
+        </div>
+    {{ form_end(form) }}
+</div>

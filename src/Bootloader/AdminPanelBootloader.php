@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Spiral\AdminPanel\Bootloader;
 
 use Spiral\AdminPanel\Config\AdminPanelConfig;
+use Spiral\AdminPanel\Session\Flash\FlashBag;
+use Spiral\AdminPanel\Session\Flash\FlashBagInterface;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Config\ConfiguratorInterface;
 use Spiral\Core\Container;
@@ -32,6 +34,10 @@ final class AdminPanelBootloader extends Bootloader
         FormBootloader::class,
         FormTwigBootloader::class,
         KnpMenuBootloader::class,
+    ];
+
+    protected const SINGLETONS = [
+        FlashBagInterface::class => FlashBag::class,
     ];
 
     public function __construct(
@@ -84,12 +90,15 @@ final class AdminPanelBootloader extends Bootloader
                 ],
                 'styles' => [
                     'admin/keeper/keeper.css',
-                    'admin/app.css'
+                    'admin/app.css',
+                    'admin/toastr/toastr.min.css'
                 ],
                 'scripts' => [
                     'admin/toolkit/ie11.js',
                     'admin/keeper/keeper.js',
                     'admin/toolkit/toolkit.js',
+                    'admin/jquery/jquery.min.js',
+                    'admin/toastr/toastr.min.js'
                 ],
                 'script_data' => []
             ]

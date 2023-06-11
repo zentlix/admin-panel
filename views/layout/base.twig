@@ -29,5 +29,19 @@
         <script type="text/javascript" src="{{ admin_panel_asset(path) }}"></script>
     {% endfor %}
     {% block scripts %}{% endblock %}
+    {% for message in flashes('success') %}
+        <script>
+            $(document).ready(function () {
+                toastr.success('{{ message | trans }}');
+            });
+        </script>
+    {% endfor %}
+    {% for message in flashes('error') %}
+        <script>
+            $(document).ready(function () {
+                toastr.error('{{ message | trans }}');
+            });
+        </script>
+    {% endfor %}
 </body>
 </html>

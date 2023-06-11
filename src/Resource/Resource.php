@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Spiral\AdminPanel\Resource;
 
+use Knp\Menu\Provider\MenuProviderInterface;
+use Knp\Menu\Twig\Helper;
+use Spiral\AdminPanel\Exception\InvalidArgumentException;
 use Spiral\Views\ViewsInterface;
 
 final class Resource implements ResourceInterface
 {
     public function __construct(
-        private readonly ViewsInterface $views
+        private readonly ViewsInterface $views,
+        private readonly Helper $helper,
+        private readonly MenuProviderInterface $menuProvider
     ) {
     }
 
@@ -22,28 +27,44 @@ final class Resource implements ResourceInterface
             $listResource->grid = $action->getShortName() . '.grid';
         }
 
-        $parameters = [
-            'title' => $listResource->title,
-            'grid' => $listResource->grid,
-            'gridRoute' => $listResource->gridRoute,
-            'gridOptions' => $listResource->gridOptions,
-            'breadcrumbs' => $listResource->breadcrumbs
-        ];
-
-        return $this->views->render($listResource->template, \array_merge($parameters, $listResource->parameters));
+        return $this->views->render($listResource->template, ['resource' => $listResource]);
     }
 
     public function renderCreate(\ReflectionMethod $action, CreateResource $createResource): string
     {
-        $parameters = [];
-
-        return $this->views->render($createResource->template, \array_merge($parameters, $createResource->parameters));
+        return $this->views->render($createResource->template, ['resource' => $createResource]);
     }
 
     public function renderUpdate(\ReflectionMethod $action, UpdateResource $updateResource): string
     {
-        $parameters = [];
+        /** @psalm-suppress TypeDoesNotContainType */
+        if (!isset($updateResource->redirectTo)) {
+            $updateResource->redirectTo = $this->getParentResourceUri();
+        }
 
-        return $this->views->render($updateResource->template, \array_merge($parameters, $updateResource->parameters));
+        return $this->views->render($updateResource->template, ['resource' => $updateResource]);
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    private function getParentResourceUri(): string
+    {
+        $item = $this->helper->getCurrentItem($this->menuProvider->get('admin_panel.sidebar'));
+        if ($item === null) {
+            throw new InvalidArgumentException(\sprintf('Please provide the `redirectTo` parameter.'));
+        }
+
+        $parent = $item->getParent() or throw new InvalidArgumentException(
+            'Failed to determine the parent resource. Please provide the `redirectTo` parameter.'
+        );
+        $uri = $parent->getUri();
+        if ($uri === null) {
+            throw new InvalidArgumentException(
+                'Failed to determine the parent resource. Please provide the `redirectTo` parameter.'
+            );
+        }
+
+        return $uri;
     }
 }

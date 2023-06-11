@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Spiral\AdminPanel\Form;
 
-use Symfony\Component\Form\AbstractType as BaseAbstractType;
+use Spiral\Symfony\Form\AbstractLivewireType;
 
-abstract class AbstractType extends BaseAbstractType
+abstract class AbstractType extends AbstractLivewireType
 {
 }
