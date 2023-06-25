@@ -10,7 +10,6 @@ use Spiral\AdminPanel\Twig\Extension\ConfigExtension;
 use Spiral\AdminPanel\Twig\Extension\DataGridExtension;
 use Spiral\AdminPanel\Twig\Extension\FlashesExtension;
 use Spiral\AdminPanel\Twig\Extension\IconExtension;
-use Spiral\AdminPanel\Twig\Extension\TitleExtension;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Boot\DirectoriesInterface;
 use Spiral\Twig\Bootloader\TwigBootloader as TwigBridge;
@@ -30,7 +29,6 @@ final class TwigBootloader extends Bootloader
 
         $twig->addExtension(ConfigExtension::class);
         $twig->addExtension(AssetExtension::class);
-        $twig->addExtension(TitleExtension::class);
         $twig->addExtension(IconExtension::class);
         $twig->addExtension(DataGridExtension::class);
         $twig->addExtension(BreadcrumbsExtension::class);

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ admin_panel_title(title | default('Admin Panel') | trans) }}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     {% if favicon is not empty %}
         <link rel="icon" type="image/x-icon" href="{{ favicon }}">
@@ -43,5 +43,15 @@
             });
         </script>
     {% endfor %}
+    <script>
+        $(document).ready(function () {
+            Livewire.on('notification.error', message => {
+                toastr.error(message);
+            });
+            Livewire.on('notification.success', message => {
+                toastr.success(message);
+            })
+        });
+    </script>
 </body>
 </html>

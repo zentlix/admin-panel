@@ -25,7 +25,6 @@ final class AdminPanelBootloader extends Bootloader
 {
     protected const DEPENDENCIES = [
         DataGridBootloader::class,
-        ResourceBootloader::class,
         TokenizerBootloader::class,
         TwigBootloader::class,
         LivewireBootloader::class,
@@ -65,7 +64,6 @@ final class AdminPanelBootloader extends Bootloader
                 'auth_transport' => 'cookie',
                 'authenticator' => Authenticator::class,
                 'password_hasher' => PasswordHasher::class,
-                'title_format' => '{title} - {brand}',
                 'dashboard_route' => 'admin.dashboard',
                 'login_route' => 'admin.login',
                 'google_fonts' => 'https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap',
