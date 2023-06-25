@@ -39,7 +39,8 @@ class LinkColumn extends ViewColumn
         'visible' => true,
         'title' => '',
         'class' => '',
-        'template' => 'admin:datagrid/column/link'
+        'template' => 'admin:datagrid/column/link',
+        'data' => null,
     ];
 
     protected function render(mixed $value, mixed $context): string

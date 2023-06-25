@@ -32,7 +32,7 @@
                                             >
                                                 {% for name, filter in filters %}
                                                     <div data-field="true" class="form-group col-sm-12 col-md-12 ">
-                                                        <label for="grid-filter-{{ name }}">{{ grid.filterLabel(name) }}</label>
+                                                        <label for="grid-filter-{{ name }}">{{ grid.filterLabel(name) | trans }}</label>
                                                         <select
                                                             id="grid-filter-{{ name }}"
                                                             data-input="true"
