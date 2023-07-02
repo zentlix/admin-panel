@@ -15,9 +15,6 @@ use Spiral\AdminPanel\Security\AuthenticatorInterface;
 use Spiral\AdminPanel\Security\PasswordHasher;
 use Spiral\AdminPanel\Security\PasswordHasherInterface;
 use Spiral\KnpMenu\Bootloader\KnpMenuBootloader;
-use Spiral\Livewire\Bootloader\LivewireBootloader;
-use Spiral\Livewire\Bootloader\TwigBootloader as LivewireTwigBootloader;
-use Spiral\Livewire\Bootloader\ValidationBootloader;
 use Spiral\Symfony\Form\Bootloader\FormBootloader;
 use Spiral\Symfony\Form\Bootloader\TwigBootloader as FormTwigBootloader;
 
@@ -27,9 +24,6 @@ final class AdminPanelBootloader extends Bootloader
         DataGridBootloader::class,
         TokenizerBootloader::class,
         TwigBootloader::class,
-        LivewireBootloader::class,
-        ValidationBootloader::class,
-        LivewireTwigBootloader::class,
         FormBootloader::class,
         FormTwigBootloader::class,
         KnpMenuBootloader::class,

@@ -8,7 +8,6 @@
     {% if favicon is not empty %}
         <link rel="icon" type="image/x-icon" href="{{ favicon }}">
     {% endif %}
-    {{ livewire_styles() }}
     {% if fontsUrl is not empty %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +20,6 @@
 </head>
 <body>
     {% block content %}{% endblock %}
-    {{ livewire_scripts() }}
     <script>
         window.AdminPanelData = {{ admin_panel_config('script_data') | json_encode() }}
     </script>
@@ -43,15 +41,5 @@
             });
         </script>
     {% endfor %}
-    <script>
-        $(document).ready(function () {
-            Livewire.on('notification.error', message => {
-                toastr.error(message);
-            });
-            Livewire.on('notification.success', message => {
-                toastr.success(message);
-            })
-        });
-    </script>
 </body>
 </html>

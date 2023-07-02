@@ -17,7 +17,6 @@
         "spiral/twig-bridge": "^2.0.1",
         "spiral/data-grid": "^3.0",
         "spiral/cycle-bridge": "^2.5",
-        "spiral-packages/livewire": "^1.0",
         "spiral-packages/symfony-form": "^1.0",
         "symfony/property-access": "^5.4 || ^6.0",
         "zentlix/knp-menu": "^1.1",
